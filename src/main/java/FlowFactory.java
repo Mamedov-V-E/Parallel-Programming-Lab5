@@ -39,7 +39,9 @@ public class FlowFactory {
                                 result.getClass() == String.class
                                         ? TestConnection(p.getKey().toString(), (Long)p.getValue())
                                         : CompletableFuture.completedFuture((Long)result)))
-                .map();
+                .map(result -> {
+                    cacheActor.tell(new CacheMessage());
+                });
     }
 
     private static CompletionStage<Long> TestConnection (String site, Long count) {
