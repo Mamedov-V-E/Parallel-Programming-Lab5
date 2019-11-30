@@ -9,7 +9,7 @@ import akka.stream.javadsl.Flow;
 import javafx.util.Pair;
 
 public class FlowFactory {
-    private static final String SITE_PARAMETER_NAME = "";
+    private static final String SITE_PARAMETER_NAME = "testUrl";
 
     public static Flow<HttpRequest, HttpResponse, NotUsed> createFlow(
             Http http,
