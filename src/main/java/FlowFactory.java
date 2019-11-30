@@ -12,6 +12,7 @@ import javafx.util.Pair;
 import scala.concurrent.Future;
 
 import java.time.Duration;
+import java.util.concurrent.CompletionStage;
 
 
 public class FlowFactory {
@@ -38,6 +39,6 @@ public class FlowFactory {
                                         ? ))
     }
 
-    private static 
+    private static CompletionStage
 
 }
