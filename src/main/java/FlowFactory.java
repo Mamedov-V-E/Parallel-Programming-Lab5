@@ -61,10 +61,10 @@ public class FlowFactory {
     private static CompletionStage<CacheMessage> TestConnection (String site, Long count, Materializer materializer) {
         return Source
                 .from(Collections.singletonList(new CacheMessage(site, count)))
-                .toMat(TestSink, Keep.right())
+                .toMat(TestSink(), Keep.right())
                 .run(materializer);
     }
 
-    private static Flow<CacheMessage> 
+    private static Flow<CacheMessage> TestSink()
 
 }
