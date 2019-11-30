@@ -66,7 +66,7 @@ public class FlowFactory {
                 .run(materializer)
                 .thenApply(sumTime -> new CacheMessage(
                         r.getSite(),
-                        ));
+                        sumTime / r.getCount()));
     }
 
     private static Sink<TestConnectionRequest, CompletionStage<Long>> TestSink() {
