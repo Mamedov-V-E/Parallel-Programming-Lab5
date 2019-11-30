@@ -28,7 +28,7 @@ public class FlowFactory {
             ActorSystem actorSystem,
             ActorRef cacheActor,
             ActorMaterializer materializer) {
-        Flow.of(HttpRequest.class).map(r -> {
+        return Flow.of(HttpRequest.class).map(r -> {
             Query q = r.getUri().query();
             String site = q.get("testUrl").get();
             Long count = Long.parseLong(q.get("count").get());
@@ -50,7 +50,7 @@ public class FlowFactory {
                                     HttpEntities.create(
                                             result.getSite() + ' ' + result. getAverageTime()
                                     )
-                            )
+                            );
                 });
     }
 
