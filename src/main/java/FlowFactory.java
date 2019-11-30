@@ -70,7 +70,7 @@ public class FlowFactory {
         return Flow.<TestConnectionRequest>create()
                 .mapConcat(r -> Collections.nCopies(r.getCount(), r.getSite()))
                 .mapAsync(MAX_SIMULTANEOUS_REQUESTS, site -> {
-                    
+                    long startTime = sys
                 })
     }
 
