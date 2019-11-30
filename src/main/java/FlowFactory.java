@@ -7,6 +7,7 @@ import akka.http.scaladsl.model.StatusCode;
 import akka.pattern.Patterns;
 import akka.stream.ActorMaterializer;
 import akka.stream.javadsl.Flow;
+import akka.stream.javadsl.Source;
 import javafx.util.Pair;
 import scala.concurrent.Future;
 
@@ -55,7 +56,8 @@ public class FlowFactory {
     }
 
     private static CompletionStage<CacheMessage> TestConnection (String site, Long count) {
-        return 
+        return Source
+                .
     }
 
 }
