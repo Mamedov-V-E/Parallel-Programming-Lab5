@@ -17,7 +17,7 @@ public class FlowFactory {
     private static final String SITE_PARAMETER_NAME = "testUrl";
     private static final String COUNT_PARAMETER_NAME = "count";
     private static final int MAX_SIMULTANEOUS_REQUESTS = 10;
-    private static final Duration TIMOUT_MILLIS = Duration.10000;
+    private static final Duration TIMOUT_MILLIS = Duration.of10000;
 
     public static Flow<HttpRequest, HttpResponse, NotUsed> createFlow(
             Http http,
