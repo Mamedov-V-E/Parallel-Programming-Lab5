@@ -8,7 +8,7 @@ public class CacheActor extends AbstractActor {
 
     public Receive createReceive() {
         return receiveBuilder().create()
-                .match(CacheMessage.class, () ->
+                .match(CacheMessage.class, m ->
                         )
                 .build();
     }
