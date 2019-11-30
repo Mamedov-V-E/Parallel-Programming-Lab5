@@ -11,7 +11,6 @@ import akka.stream.javadsl.Flow;
 import javafx.util.Pair;
 import scala.concurrent.Future;
 
-import java.util.regex.Pattern;
 
 public class FlowFactory {
     private static final String SITE_PARAMETER_NAME = "testUrl";
