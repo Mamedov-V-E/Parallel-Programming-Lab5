@@ -77,7 +77,7 @@ public class FlowFactory {
                             .prepareGet(site)
                             .execute()
                             .toCompletableFuture()
-                            .
+                            .thenApply()
 
                 })
                 .toMat(Sink.fold(0L, Long::sum), Keep.right());
