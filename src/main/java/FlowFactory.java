@@ -74,6 +74,7 @@ public class FlowFactory {
                     AsyncHttpClient httpClient = Dsl.asyncHttpClient();
 
                     return httpClient
+                            .prepareGet(site)
                             .
 
                 })
