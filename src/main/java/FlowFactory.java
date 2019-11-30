@@ -66,8 +66,8 @@ public class FlowFactory {
                 .run(materializer);
     }
 
-    private static Flow<CacheMessage> TestSink() {
-        return Flow.<CacheMessage>create()
+    private static Flow<TestConnectionRequest> TestSink() {
+        return Flow.<TestConnectionRequest>create()
                 .mapConcat(cacheMessage -> Collections.nCopies(cacheMessage.))
     }
 
