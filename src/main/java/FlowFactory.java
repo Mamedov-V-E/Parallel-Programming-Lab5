@@ -8,6 +8,7 @@ import akka.http.javadsl.model.Query;
 import akka.pattern.Patterns;
 import akka.stream.ActorMaterializer;
 import akka.stream.javadsl.Flow;
+import javafx.util.Duration;
 import javafx.util.Pair;
 import scala.concurrent.Future;
 
@@ -16,7 +17,7 @@ public class FlowFactory {
     private static final String SITE_PARAMETER_NAME = "testUrl";
     private static final String COUNT_PARAMETER_NAME = "count";
     private static final int MAX_SIMULTANEOUS_REQUESTS = 10;
-    private static final long TIMOUT_MILLIS = 10000;
+    private static final Duration TIMOUT_MILLIS = Duration.10000;
 
     public static Flow<HttpRequest, HttpResponse, NotUsed> createFlow(
             Http http,
