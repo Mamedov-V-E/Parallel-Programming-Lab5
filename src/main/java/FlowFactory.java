@@ -65,6 +65,8 @@ public class FlowFactory {
                 .run(materializer);
     }
 
-    private static Flow<CacheMessage> TestSink()
+    private static Flow<CacheMessage> TestSink() {
+        
+    }
 
 }
