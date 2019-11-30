@@ -47,7 +47,7 @@ public class FlowFactory {
                                         ? TestConnection(r, materializer)
                                         : CompletableFuture.completedFuture((CacheMessage)result)))
                 .map(result -> {
-                    cacheActor.tell(result, self());
+                    cacheActor.tell(result, ActorRef.noSender());
 
                     return HttpResponse
                             .create()
