@@ -17,7 +17,7 @@ public class FlowFactory {
     private static final String SITE_PARAMETER_NAME = "testUrl";
     private static final String COUNT_PARAMETER_NAME = "count";
     private static final int MAX_SIMULTANEOUS_REQUESTS = 10;
-    private static final long TIMOUT_MILLIS
+    private static final long TIMOUT_MILLIS = 10000;
 
     public static Flow<HttpRequest, HttpResponse, NotUsed> createFlow(
             Http http,
@@ -27,6 +27,6 @@ public class FlowFactory {
         Flow.of(HttpRequest.class).map(r -> {
             Query q = r.getUri().query();
             return new Pair(q.get("testUrl").get(), Long.parseLong(q.get("count").get()));
-        }).mapAsync(MAX_SIMULTANEOUS_REQUESTS, p -> Patterns.ask(cacheActor, new CheckCachedMessage(p.getKey().toString(), )))
+        }).mapAsync(MAX_SIMULTANEOUS_REQUESTS, p -> Patterns.ask(cacheActor, new CheckCachedMessage(p.getKey().toString()), TIMOUT_MILLIS).)
     }
 }
