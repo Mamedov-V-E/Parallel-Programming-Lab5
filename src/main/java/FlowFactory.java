@@ -27,6 +27,7 @@ public class FlowFactory {
     private static final String COUNT_PARAMETER_NAME = "count";
     private static final int MAX_SIMULTANEOUS_REQUESTS = 10;
     private static final Duration TIMOUT_MILLIS = Duration.ofMillis(10000);
+    private static final int NANO_TO_MILLIS_FACTOR = 100
 
     public static Flow<HttpRequest, HttpResponse, NotUsed> createFlow(
             Http http,
