@@ -6,6 +6,7 @@ import akka.http.javadsl.model.*;
 import akka.http.scaladsl.model.StatusCode;
 import akka.pattern.Patterns;
 import akka.stream.ActorMaterializer;
+import akka.stream.Materializer;
 import akka.stream.javadsl.Flow;
 import akka.stream.javadsl.Keep;
 import akka.stream.javadsl.Source;
@@ -41,7 +42,7 @@ public class FlowFactory {
                 Patterns.ask(cacheActor, new CheckCachedMessage(p.getKey().toString()), TIMOUT_MILLIS)
                         .thenCompose(result ->
                                 result.getClass() == String.class
-                                        ? TestConnection(p.getKey().toString(), (Long)p.getValue())
+                                        ? TestConnection(p.getKey().toString(), (Long)p.getValue(), materializer)
                                         : CompletableFuture.completedFuture((CacheMessage)result)))
                 .map(result -> {
                     cacheActor.tell(result, self());
@@ -57,11 +58,11 @@ public class FlowFactory {
                 });
     }
 
-    private static CompletionStage<CacheMessage> TestConnection (String site, Long count, ma) {
+    private static CompletionStage<CacheMessage> TestConnection (String site, Long count, Materializer materializer) {
         return Source
                 .from(Collections.singletonList(new CacheMessage(site, count)))
                 .toMat(TestSink, Keep.right())
-                .run(ma)
+                .run(materializer)
     }
 
 }
