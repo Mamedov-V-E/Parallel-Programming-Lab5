@@ -10,6 +10,6 @@ public class AkkaApp {
         ActorSystem system = ActorSystem.create("routes");
         final Http http = Http.get(system);
         final ActorMaterializer materializer = ActorMaterializer.create(system);
-        
+
     }
 }
