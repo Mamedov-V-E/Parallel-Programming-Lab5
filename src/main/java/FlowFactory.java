@@ -30,7 +30,7 @@ public class FlowFactory {
             Long count = Long.parseLong(q.get("count").get());
 
             return new Pair(site, count);
-        }).mapAsync(MAX_SIMULTANEOUS_REQUESTS, p ->
-                Patterns.ask(cacheActor, new CheckCachedMessage(p.getKey().toString()), TIMOUT_MILLIS))
+        }).mapAsync(MAX_SIMULTANEOUS_REQUESTS, (p) ->
+                Patterns.ask(cacheActor, new CheckCachedMessage(p.getKey().toString()), TIMOUT_MILLIS).then)
     }
 }
