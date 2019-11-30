@@ -8,16 +8,17 @@ import akka.http.javadsl.model.Query;
 import akka.pattern.Patterns;
 import akka.stream.ActorMaterializer;
 import akka.stream.javadsl.Flow;
-import javafx.util.Duration;
 import javafx.util.Pair;
 import scala.concurrent.Future;
+
+import java.time.Duration;
 
 
 public class FlowFactory {
     private static final String SITE_PARAMETER_NAME = "testUrl";
     private static final String COUNT_PARAMETER_NAME = "count";
     private static final int MAX_SIMULTANEOUS_REQUESTS = 10;
-    private static final Duration TIMOUT_MILLIS = Duration.of10000;
+    private static final Duration TIMOUT_MILLIS = Duration.ofMillis(10000);
 
     public static Flow<HttpRequest, HttpResponse, NotUsed> createFlow(
             Http http,
@@ -31,6 +32,7 @@ public class FlowFactory {
 
             return new Pair(site, count);
         }).mapAsync(MAX_SIMULTANEOUS_REQUESTS, (p) ->
-                Patterns.ask(cacheActor, new CheckCachedMessage(p.getKey().toString()), TIMOUT_MILLIS).)
+                Patterns.ask(cacheActor, new CheckCachedMessage(p.getKey().toString()), TIMOUT_MILLIS)
+                        .thenCompose())
     }
 }
