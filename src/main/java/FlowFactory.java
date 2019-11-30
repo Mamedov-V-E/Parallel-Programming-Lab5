@@ -37,12 +37,12 @@ public class FlowFactory {
             String site = q.get("testUrl").get();
             Long count = Long.parseLong(q.get("count").get());
 
-            return new TestConnectionRequest(site, count);
-        }).mapAsync(MAX_SIMULTANEOUS_REQUESTS, r ->
-                Patterns.ask(cacheActor, new CheckCachedMessage(r.getSite()), TIMOUT_MILLIS)
+            return new Pair(site, count);
+        }).mapAsync(MAX_SIMULTANEOUS_REQUESTS, (p) ->
+                Patterns.ask(cacheActor, new CheckCachedMessage(p.getKey().toString()), TIMOUT_MILLIS)
                         .thenCompose(result ->
                                 result.getClass() == String.class
-                                        ? TestConnection(r.getSite(), r.getCount(), materializer)
+                                        ? TestConnection(p, materializer)
                                         : CompletableFuture.completedFuture((CacheMessage)result)))
                 .map(result -> {
                     cacheActor.tell(result, self());
@@ -52,13 +52,13 @@ public class FlowFactory {
                             .withStatus(StatusCodes.OK)
                             .withEntity(
                                     HttpEntities.create(
-                                            result.getSite() + ' ' + result. getAverageTime()
+                                            result + ' ' + result. getAverageTime()
                                     )
                             );
                 });
     }
 
-    private static CompletionStage<CacheMessage> TestConnection (String site, Long count, Materializer materializer) {
+    private static CompletionStage<CacheMessage> TestConnection (Pair<String, Long> p, Materializer materializer) {
         return Source
                 .from(Collections.singletonList(new CacheMessage(site, count)))
                 .toMat(TestSink(), Keep.right())
