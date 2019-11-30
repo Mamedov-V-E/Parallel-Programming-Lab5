@@ -76,7 +76,7 @@ public class FlowFactory {
                             .
 
                 })
-                .toMat(Sink.fold(0, Long::sum), Keep.right())
+                .toMat(Sink.fold(0L, Long::sum), Keep.right());
     }
 
 }
