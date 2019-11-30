@@ -14,6 +14,7 @@ import javafx.util.Pair;
 import scala.Int;
 import scala.concurrent.Future;
 
+import java.net.http.HttpClient;
 import java.time.Duration;
 import java.util.Collections;
 import java.util.concurrent.CompletableFuture;
@@ -71,6 +72,8 @@ public class FlowFactory {
                 .mapConcat(r -> Collections.nCopies(r.getCount(), r.getSite()))
                 .mapAsync(MAX_SIMULTANEOUS_REQUESTS, site -> {
                     long startTime = System.nanoTime();
+
+                    return HttpClient
                 })
     }
 
