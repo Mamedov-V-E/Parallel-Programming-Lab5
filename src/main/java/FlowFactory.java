@@ -67,7 +67,7 @@ public class FlowFactory {
                 .run(materializer)
                 .thenApply(sumTime -> new CacheMessage(
                         r.getSite(),
-                        sumTime / r.getCount()));
+                        sumTime / r.getCount() / NANO_TO_MILLIS_FACTOR));
     }
 
     private static Sink<TestConnectionRequest, CompletionStage<Long>> TestSink() {
