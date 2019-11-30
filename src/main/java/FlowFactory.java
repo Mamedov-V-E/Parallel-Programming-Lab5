@@ -11,6 +11,8 @@ import akka.stream.javadsl.Flow;
 import javafx.util.Pair;
 import scala.concurrent.Future;
 
+import java.util.regex.Pattern;
+
 public class FlowFactory {
     private static final String SITE_PARAMETER_NAME = "testUrl";
     private static final String COUNT_PARAMETER_NAME = "count";
@@ -24,8 +26,6 @@ public class FlowFactory {
         Flow.of(HttpRequest.class).map(r -> {
             Query q = r.getUri().query();
             return new Pair(q.get("testUrl").get(), Long.parseLong(q.get("count").get()));
-        }).mapAsync(MAX_SIMULTANEOUS_REQUESTS, p -> {
-            Future<Object> cached = Patterns.ask()
-        })
+        }).mapAsync(MAX_SIMULTANEOUS_REQUESTS, p -> Patterns.ask(cacheActor, ))
     }
 }
