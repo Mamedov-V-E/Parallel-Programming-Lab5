@@ -13,6 +13,6 @@ public class FlowFactory {
             Http http,
             ActorSystem actorSystem,
             ActorMaterializer materializer) {
-        Flow.of(HttpRequest.class).map(Pair)
+        Flow.of(HttpRequest.class).map(new Pair)
     }
 }
