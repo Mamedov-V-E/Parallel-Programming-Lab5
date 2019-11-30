@@ -11,7 +11,7 @@ import javafx.util.Pair;
 public class FlowFactory {
     private static final String SITE_PARAMETER_NAME = "testUrl";
     private static final String COUNT_PARAMETER_NAME = "count";
-    private static final int MAX_
+    private static final int MAX_SIMO
 
     public static Flow<HttpRequest, HttpResponse, NotUsed> createFlow(
             Http http,
