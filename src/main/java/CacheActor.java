@@ -12,7 +12,9 @@ public class CacheActor extends AbstractActor {
                         cache.put(m.getSite(), m.getAverageTime()))
                 .match(CheckCachedMessage.class, m -> {
                     Long cashed = cache.get(m.getSite());
-                    
+                    if (cashed != null) {
+                        
+                    }
                         })
                 .build();
     }
