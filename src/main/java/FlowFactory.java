@@ -63,7 +63,7 @@ public class FlowFactory {
                 .from(Collections.singletonList(p))
                 .toMat(TestSink(), Keep.right())
                 .run(materializer)
-                .;
+                .then;
     }
 
     private static Flow<CacheMessage> TestSink() {
