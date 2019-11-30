@@ -14,7 +14,7 @@ public class FlowFactory {
             ActorSystem actorSystem,
             ActorMaterializer materializer) {
         Flow.of(HttpRequest.class).map(r -> {
-            return new Pair(r.)
+            return new Pair(r.getUri().query().)
         })
     }
 }
