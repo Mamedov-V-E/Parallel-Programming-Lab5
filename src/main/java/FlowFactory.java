@@ -57,10 +57,11 @@ public class FlowFactory {
                 });
     }
 
-    private static CompletionStage<CacheMessage> TestConnection (String site, Long count) {
+    private static CompletionStage<CacheMessage> TestConnection (String site, Long count, ma) {
         return Source
                 .from(Collections.singletonList(new CacheMessage(site, count)))
-                .toMat(TestSink, Keep.right()).
+                .toMat(TestSink, Keep.right())
+                .run(ma)
     }
 
 }
