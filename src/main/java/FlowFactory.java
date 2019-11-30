@@ -22,7 +22,7 @@ public class FlowFactory {
             Query q = r.getUri().query();
             return new Pair(q.get("testUrl").get(), Long.parseLong(q.get("count").get()));
         }).mapAsync(MAX_SIMULTANEOUS_REQUESTS, p -> {
-            Future<Object> cached 
+            Future<Object> cached = 
         })
     }
 }
