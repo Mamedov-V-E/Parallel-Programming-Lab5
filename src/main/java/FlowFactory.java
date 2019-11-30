@@ -13,7 +13,6 @@ import akka.stream.javadsl.Source;
 import org.asynchttpclient.AsyncHttpClient;
 import org.asynchttpclient.Dsl;
 
-import java.net.http.HttpClient;
 import java.time.Duration;
 import java.util.Collections;
 import java.util.concurrent.CompletableFuture;
