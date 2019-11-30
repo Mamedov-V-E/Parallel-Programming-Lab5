@@ -65,6 +65,6 @@ public class FlowFactory {
                 .run(materializer);
     }
 
-    private static 
+    private static Flow<>
 
 }
