@@ -10,9 +10,8 @@ import akka.stream.Materializer;
 import akka.stream.javadsl.Flow;
 import akka.stream.javadsl.Keep;
 import akka.stream.javadsl.Source;
-import javafx.util.Pair;
-import scala.Int;
-import scala.concurrent.Future;
+import org.asynchttpclient.AsyncHttpClient;
+import org.asynchttpclient.Dsl;
 
 import java.net.http.HttpClient;
 import java.time.Duration;
