@@ -1,3 +1,4 @@
 public class CacheMessage {
-    private
+    private final String site;
+    private final Long
 }
