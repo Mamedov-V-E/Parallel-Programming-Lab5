@@ -5,6 +5,7 @@ import akka.http.javadsl.model.HttpRequest;
 import akka.http.javadsl.model.HttpResponse;
 import akka.stream.ActorMaterializer;
 import akka.stream.javadsl.Flow;
+import javafx.util.Pair;
 
 public class FlowFactory {
 
@@ -12,6 +13,6 @@ public class FlowFactory {
             Http http,
             ActorSystem actorSystem,
             ActorMaterializer materializer) {
-        Flow.of(HttpRequest.class).map()
+        Flow.of(HttpRequest.class).map(Pair)
     }
 }
