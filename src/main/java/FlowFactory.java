@@ -37,7 +37,7 @@ public class FlowFactory {
                         .thenCompose(result ->
                                 result.getClass() == String.class
                                         ? TestConnection(p.getKey().toString(), (Long)p.getValue())
-                                        : new Compl))
+                                        : new comp))
     }
 
     private static CompletionStage<Long> TestConnection (String site, Long count) {
