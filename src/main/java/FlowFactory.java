@@ -12,6 +12,7 @@ import javafx.util.Pair;
 import scala.concurrent.Future;
 
 import java.time.Duration;
+import java.util.Collections;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.CompletionStage;
 
@@ -57,7 +58,7 @@ public class FlowFactory {
 
     private static CompletionStage<CacheMessage> TestConnection (String site, Long count) {
         return Source
-                .
+                .from(Collections)
     }
 
 }
