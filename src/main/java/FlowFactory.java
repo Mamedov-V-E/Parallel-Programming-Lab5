@@ -76,6 +76,7 @@ public class FlowFactory {
                     return httpClient
                             .prepareGet(site)
                             .execute()
+                            .toCompletableFuture()
                             .
 
                 })
