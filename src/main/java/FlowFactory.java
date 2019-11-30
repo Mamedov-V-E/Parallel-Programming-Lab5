@@ -12,6 +12,7 @@ import javafx.util.Pair;
 import scala.concurrent.Future;
 
 import java.time.Duration;
+import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.CompletionStage;
 
 
@@ -37,7 +38,7 @@ public class FlowFactory {
                         .thenCompose(result ->
                                 result.getClass() == String.class
                                         ? TestConnection(p.getKey().toString(), (Long)p.getValue())
-                                        : new comp))
+                                        : new CompletableFuture<>()))
     }
 
     private static CompletionStage<Long> TestConnection (String site, Long count) {
