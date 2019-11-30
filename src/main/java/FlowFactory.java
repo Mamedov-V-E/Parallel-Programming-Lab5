@@ -27,6 +27,6 @@ public class FlowFactory {
         Flow.of(HttpRequest.class).map(r -> {
             Query q = r.getUri().query();
             return new Pair(q.get("testUrl").get(), Long.parseLong(q.get("count").get()));
-        }).mapAsync(MAX_SIMULTANEOUS_REQUESTS, p -> Patterns.ask(cacheActor, new CheckCachedMessage(p.getKey().toString()), TIMOUT_MILLIS).the)
+        }).mapAsync(MAX_SIMULTANEOUS_REQUESTS, p -> Patterns.ask(cacheActor, new CheckCachedMessage(p.getKey().toString()), TIMOUT_MILLIS))
     }
 }
