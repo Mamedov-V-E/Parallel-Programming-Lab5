@@ -11,6 +11,7 @@ import akka.stream.javadsl.Flow;
 import akka.stream.javadsl.Keep;
 import akka.stream.javadsl.Source;
 import javafx.util.Pair;
+import scala.Int;
 import scala.concurrent.Future;
 
 import java.time.Duration;
@@ -35,14 +36,14 @@ public class FlowFactory {
         return Flow.of(HttpRequest.class).map(r -> {
             Query q = r.getUri().query();
             String site = q.get("testUrl").get();
-            Long count = Long.parseLong(q.get("count").get());
+            Integer count = Integer.parseInt(q.get("count").get());
 
-            return new Pair(site, count);
-        }).mapAsync(MAX_SIMULTANEOUS_REQUESTS, (p) ->
-                Patterns.ask(cacheActor, new CheckCachedMessage(p.getKey().toString()), TIMOUT_MILLIS)
+            return new TestConnectionRequest(site, count);
+        }).mapAsync(MAX_SIMULTANEOUS_REQUESTS, (r) ->
+                Patterns.ask(cacheActor, new CheckCachedMessage(r.getSite()), TIMOUT_MILLIS)
                         .thenCompose(result ->
                                 result.getClass() == String.class
-                                        ? TestConnection(p, materializer)
+                                        ? TestConnection(r, materializer)
                                         : CompletableFuture.completedFuture((CacheMessage)result)))
                 .map(result -> {
                     cacheActor.tell(result, self());
@@ -58,11 +59,12 @@ public class FlowFactory {
                 });
     }
 
-    private static CompletionStage<CacheMessage> TestConnection (Pair<String, Long> p, Materializer materializer) {
+    private static CompletionStage<CacheMessage> TestConnection (TestConnectionRequest r, Materializer materializer) {
         return Source
-                .from(Collections.singletonList(p))
+                .from(Collections.singletonList(r))
                 .toMat(TestSink(), Keep.right())
-                .run(materializer);
+                .run(materializer)
+                .;
     }
 
     private static Flow<CacheMessage> TestSink() {
