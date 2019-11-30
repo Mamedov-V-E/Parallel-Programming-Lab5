@@ -28,6 +28,6 @@ public class FlowFactory {
             Query q = r.getUri().query();
             return new Pair(q.get("testUrl").get(), Long.parseLong(q.get("count").get()));
         }).mapAsync(MAX_SIMULTANEOUS_REQUESTS, p ->
-                Patterns.ask(cacheActor, new CheckCachedMessage(p.getKey().toString()), TIMOUT_MILLIS).)
+                Patterns.ask(cacheActor, new CheckCachedMessage(p.getKey().toString()), TIMOUT_MILLIS).the)
     }
 }
