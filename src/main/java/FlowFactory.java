@@ -24,11 +24,13 @@ public class FlowFactory {
             ActorSystem actorSystem,
             ActorRef cacheActor,
             ActorMaterializer materializer) {
-
         Flow.of(HttpRequest.class).map(r -> {
             Query q = r.getUri().query();
-            return new Pair(q.get("testUrl").get(), Long.parseLong(q.get("count").get()));
+            String site = q.get("testUrl").get();
+            Long count = Long.parseLong(q.get("count").get());
+
+            return new CheckCachedMessage(site);
         }).mapAsync(MAX_SIMULTANEOUS_REQUESTS, p ->
-                Patterns.ask(cacheActor, new CheckCachedMessage(p.getKey().toString()), TIMOUT_MILLIS).the)
+                Patterns.ask(cacheActor, new CheckCachedMessage(p.getKey().toString()), TIMOUT_MILLIS).then)
     }
 }
