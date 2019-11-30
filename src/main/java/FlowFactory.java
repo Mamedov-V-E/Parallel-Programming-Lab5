@@ -66,13 +66,13 @@ public class FlowFactory {
                 .run(materializer);
     }
 
-    private static Flow<TestConnectionRequest> TestSink() {
+    private static Sink<TestConnectionRequest> TestSink() {
         return Flow.<TestConnectionRequest>create()
                 .mapConcat(r -> Collections.nCopies(r.getCount(), r.getSite()))
                 .mapAsync(MAX_SIMULTANEOUS_REQUESTS, site -> {
                     long startTime = System.nanoTime();
 
-                    return 
+                    return
 
                 })
                 .toMat(Sink.fold(0L, Long::sum), Keep.right());
