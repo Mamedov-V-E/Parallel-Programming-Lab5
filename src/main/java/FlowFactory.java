@@ -10,7 +10,7 @@ import javafx.util.Pair;
 
 public class FlowFactory {
     private static final String SITE_PARAMETER_NAME = "testUrl";
-    private static final String 
+    private static final String COUNT_PARAMETER_NAME = "count";
 
     public static Flow<HttpRequest, HttpResponse, NotUsed> createFlow(
             Http http,
