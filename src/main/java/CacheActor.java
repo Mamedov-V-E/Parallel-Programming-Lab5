@@ -13,7 +13,7 @@ public class CacheActor extends AbstractActor {
                 .match(CheckCachedMessage.class, m -> {
                     Long cashed = cache.get(m.getSite());
                     if (cashed != null) {
-                        sender().tell();
+                        sender().tell(cashed);
                     }
                 })
                 .build();
