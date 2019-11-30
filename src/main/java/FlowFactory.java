@@ -1,9 +1,6 @@
 import akka.NotUsed;
 import akka.actor.ActorRef;
-import akka.actor.ActorSystem;
-import akka.http.javadsl.Http;
 import akka.http.javadsl.model.*;
-import akka.http.scaladsl.model.StatusCode;
 import akka.pattern.Patterns;
 import akka.stream.ActorMaterializer;
 import akka.stream.Materializer;
@@ -19,9 +16,6 @@ import java.util.Collections;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.CompletionStage;
 
-import static akka.actor.TypedActor.self;
-
-
 public class FlowFactory {
     private static final String SITE_PARAMETER_NAME = "testUrl";
     private static final String COUNT_PARAMETER_NAME = "count";
@@ -34,8 +28,8 @@ public class FlowFactory {
             ActorMaterializer materializer) {
         return Flow.of(HttpRequest.class).map(r -> {
             Query q = r.getUri().query();
-            String site = q.get("testUrl").get();
-            Integer count = Integer.parseInt(q.get("count").get());
+            String site = q.get(SITE_PARAMETER_NAME).get();
+            Integer count = Integer.parseInt(q.get(COUNT_PARAMETER_NAME).get());
 
             return new TestConnectionRequest(site, count);
         }).mapAsync(MAX_SIMULTANEOUS_REQUESTS, (r) ->

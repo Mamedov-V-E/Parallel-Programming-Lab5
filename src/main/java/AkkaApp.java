@@ -14,9 +14,9 @@ import java.io.IOException;
 import java.util.concurrent.CompletionStage;
 
 public class AkkaApp {
-    public static final String ACTOR_SYSTEM_NAME = "routes";
-    public static final String HOST_NAME = "localhost";
-    public static final int PORT_NUMBER = 8080;
+    private static final String ACTOR_SYSTEM_NAME = "routes";
+    private static final String HOST_NAME = "localhost";
+    private static final int PORT_NUMBER = 8080;
 
     public static void main(String[] args) throws IOException {
         System.out.println("start!");
