@@ -68,7 +68,7 @@ public class FlowFactory {
 
     private static Flow<TestConnectionRequest> TestSink() {
         return Flow.<TestConnectionRequest>create()
-                .mapConcat(cacheMessage -> Collections.nCopies(cacheMessage.))
+                .mapConcat(r -> Collections.nCopies(r.getCount(), r.getSite()))
     }
 
 }
