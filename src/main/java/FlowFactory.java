@@ -73,7 +73,8 @@ public class FlowFactory {
                 .mapAsync(MAX_SIMULTANEOUS_REQUESTS, site -> {
                     long startTime = System.nanoTime();
 
-                    return HttpClient
+                    return httpClient
+
                 })
     }
 
