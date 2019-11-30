@@ -71,7 +71,7 @@ public class FlowFactory {
                 .mapConcat(r -> Collections.nCopies(r.getCount(), r.getSite()))
                 .mapAsync(MAX_SIMULTANEOUS_REQUESTS, site -> {
                     long startTime = System.nanoTime();
-                    AsyncHttpClient httpClient = 
+                    AsyncHttpClient httpClient = Dsl.
 
                     return AsyncHttpClient
                             .
