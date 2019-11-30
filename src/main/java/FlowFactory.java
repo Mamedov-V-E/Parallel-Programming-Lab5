@@ -64,7 +64,9 @@ public class FlowFactory {
                 .from(Collections.singletonList(r))
                 .toMat(TestSink(), Keep.right())
                 .run(materializer)
-                .thenApply(sumTime -> );
+                .thenApply(sumTime -> new CacheMessage(
+                        r.getSite(),
+                        ));
     }
 
     private static Sink<TestConnectionRequest, CompletionStage<Long>> TestSink() {
