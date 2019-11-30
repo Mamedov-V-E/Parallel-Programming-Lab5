@@ -5,7 +5,7 @@ import akka.http.javadsl.Http;
 import akka.http.javadsl.model.HttpRequest;
 import akka.http.javadsl.model.HttpResponse;
 import akka.http.javadsl.model.Query;
-import akka.http.javadsl.model.StatusCode;
+import akka.http.scaladsl.model.StatusCode;
 import akka.pattern.Patterns;
 import akka.stream.ActorMaterializer;
 import akka.stream.javadsl.Flow;
@@ -47,7 +47,7 @@ public class FlowFactory {
 
                     return HttpResponse
                             .create()
-                            .withStatus(StatusCode.)
+                            .withStatus(StatusCode)
                             .
                 });
     }
