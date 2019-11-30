@@ -46,7 +46,7 @@ public class FlowFactory {
 
                     return HttpResponse
                             .create()
-                            .status()
+                            .withStatus(O)
                 });
     }
 
