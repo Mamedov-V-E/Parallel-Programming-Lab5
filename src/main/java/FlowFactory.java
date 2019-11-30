@@ -12,6 +12,6 @@ public class FlowFactory {
             Http http,
             ActorSystem actorSystem,
             ActorMaterializer materializer) {
-        FlowOf
+        Flow.of(HttpRequest.class)
     }
 }
