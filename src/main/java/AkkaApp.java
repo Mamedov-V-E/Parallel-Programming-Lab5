@@ -12,26 +12,26 @@ import java.io.IOException;
 import java.util.concurrent.CompletionStage;
 
 public class AkkaApp {
+    public static final String ACTOR_SYSTEM_NAME = "routes";
     public static final String HOST_NAME = "localhost";
     public static final int PORT_NUMBER = 8080;
 
     public static void main(String[] args) throws IOException {
         System.out.println("start!");
-        ActorSystem system = ActorSystem.create("routes");
+        ActorSystem system = ActorSystem.create(ACTOR_SYSTEM_NAME);
         final Http http = Http.get(system);
         final ActorMaterializer materializer = ActorMaterializer.create(system);
         final Flow<HttpRequest, HttpResponse, NotUsed> routeFlow =
                 FlowFactory.createFlow(http, system, materializer);
         final CompletionStage<ServerBinding> binding = http.bindAndHandle(
                 routeFlow,
-                ConnectHttp.toHost("localhost", 8080),
+                ConnectHttp.toHost(HOST_NAME, PORT_NUMBER),
                 materializer
         );
-        System.out.println("Server online at http://localhost:8080/\nPress RETURN to stop...");
+        System.out.println("Server online at http://" + HOST_NAME + ":" + PORT_NUMBER + "\nPress RETURN to stop...");
         System.in.read();
         binding
                 .thenCompose(ServerBinding::unbind)
                 .thenAccept(unbound -> system.terminate());
-    }
     }
 }
