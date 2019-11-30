@@ -36,11 +36,12 @@ public class FlowFactory {
                 Patterns.ask(cacheActor, new CheckCachedMessage(p.getKey().toString()), TIMOUT_MILLIS)
                         .thenCompose(result ->
                                 result.getClass() == String.class
-                                        ? ))
+                                        ? TestConnection(p.getKey().toString(), (Long)p.getValue())
+                                        : ))
     }
 
     private static CompletionStage<Long> TestConnection (String site, Long count) {
-        
+
     }
 
 }
