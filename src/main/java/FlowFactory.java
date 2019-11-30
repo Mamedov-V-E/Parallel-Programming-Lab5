@@ -43,6 +43,8 @@ public class FlowFactory {
                                         : CompletableFuture.completedFuture((CacheMessage)result)))
                 .map(result -> {
                     cacheActor.tell(result, self());
+
+                    return
                 });
     }
 
