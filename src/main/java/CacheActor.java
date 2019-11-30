@@ -10,8 +10,10 @@ public class CacheActor extends AbstractActor {
         return receiveBuilder().create()
                 .match(CacheMessage.class, m ->
                         cache.put(m.getSite(), m.getAverageTime()))
-                .match(CheckCachedMessage.class, m ->
-                        )
+                .match(CheckCachedMessage.class, m -> {
+                    Long cashed = cache.get(m.getSite());
+                    
+                        })
                 .build();
     }
 }
