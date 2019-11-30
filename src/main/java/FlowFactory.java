@@ -44,7 +44,9 @@ public class FlowFactory {
                 .map(result -> {
                     cacheActor.tell(result, self());
 
-                    return
+                    return HttpResponse
+                            .create()
+                            .status()
                 });
     }
 
