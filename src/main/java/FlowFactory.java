@@ -66,7 +66,7 @@ public class FlowFactory {
     }
 
     private static Flow<CacheMessage> TestSink() {
-        return Flow.<>
+        return Flow.<CacheMessage>.crea
     }
 
 }
