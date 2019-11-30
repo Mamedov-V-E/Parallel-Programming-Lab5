@@ -72,8 +72,7 @@ public class FlowFactory {
                 .mapAsync(MAX_SIMULTANEOUS_REQUESTS, site -> {
                     long startTime = System.nanoTime();
 
-                    return httpClient
-                            .
+                    return httpClient.
 
                 })
                 .toMat(Sink.fold(0L, Long::sum), Keep.right());
