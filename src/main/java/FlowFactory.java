@@ -52,7 +52,7 @@ public class FlowFactory {
                             .withStatus(StatusCodes.OK)
                             .withEntity(
                                     HttpEntities.create(
-                                            result + ' ' + result. getAverageTime()
+                                            result.getSite() + ' ' + result. getAverageTime()
                                     )
                             );
                 });
