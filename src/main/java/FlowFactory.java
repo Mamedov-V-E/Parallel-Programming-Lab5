@@ -47,7 +47,7 @@ public class FlowFactory {
                             .create()
                             .withStatus(StatusCodes.OK)
                             .withEntity(
-                                    HttpEntities
+                                    HttpEntities.create()
                             )
                 });
     }
