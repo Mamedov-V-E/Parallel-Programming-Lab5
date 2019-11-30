@@ -29,8 +29,8 @@ public class FlowFactory {
             String site = q.get("testUrl").get();
             Long count = Long.parseLong(q.get("count").get());
 
-            return new CheckCachedMessage(site);
+            return new Pair(site, count);
         }).mapAsync(MAX_SIMULTANEOUS_REQUESTS, p ->
-                Patterns.ask(cacheActor, new CheckCachedMessage(p.getKey().toString()), TIMOUT_MILLIS).then)
+                Patterns.ask(cacheActor, new CheckCachedMessage(p.getKey().toString()), TIMOUT_MILLIS))
     }
 }
