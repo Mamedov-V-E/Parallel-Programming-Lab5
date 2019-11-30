@@ -12,6 +12,9 @@ import java.io.IOException;
 import java.util.concurrent.CompletionStage;
 
 public class AkkaApp {
+    public static final String HOST_NAME = "localhost";
+    public static final int PORT_NUMBER = 8080;
+
     public static void main(String[] args) throws IOException {
         System.out.println("start!");
         ActorSystem system = ActorSystem.create("routes");
@@ -24,6 +27,11 @@ public class AkkaApp {
                 ConnectHttp.toHost("localhost", 8080),
                 materializer
         );
-        
+        System.out.println("Server online at http://localhost:8080/\nPress RETURN to stop...");
+        System.in.read();
+        binding
+                .thenCompose(ServerBinding::unbind)
+                .thenAccept(unbound -> system.terminate());
+    }
     }
 }
