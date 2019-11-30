@@ -12,9 +12,9 @@ public class CacheActor extends AbstractActor {
                 .match(CacheMessage.class, m ->
                         cache.put(m.getSite(), m.getAverageTime()))
                 .match(CheckCachedMessage.class, m -> {
-                    Long cashed = cache.get(m.getSite());
-                    if (cashed != null) {
-                        sender().tell(cashed, self());
+                    Long cashedTime = cache.get(m.getSite());
+                    if (cashedTime != null) {
+                        sender().tell(new CacheMessage(m.getSite(), cashedTime), self());
                     } else {
                         sender().tell(NOT_CACHED_MESSAGE, self());
                     }

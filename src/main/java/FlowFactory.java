@@ -15,6 +15,8 @@ import java.time.Duration;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.CompletionStage;
 
+import static akka.actor.TypedActor.self;
+
 
 public class FlowFactory {
     private static final String SITE_PARAMETER_NAME = "testUrl";
@@ -38,13 +40,13 @@ public class FlowFactory {
                         .thenCompose(result ->
                                 result.getClass() == String.class
                                         ? TestConnection(p.getKey().toString(), (Long)p.getValue())
-                                        : CompletableFuture.completedFuture((Long)result)))
+                                        : CompletableFuture.completedFuture((CacheMessage)result)))
                 .map(result -> {
-                    cacheActor.tell(new CacheMessage());
+                    cacheActor.tell(result, self());
                 });
     }
 
-    private static CompletionStage<Long> TestConnection (String site, Long count) {
+    private static CompletionStage<CacheMessage> TestConnection (String site, Long count) {
 
     }
 
