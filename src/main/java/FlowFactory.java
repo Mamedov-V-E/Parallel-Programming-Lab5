@@ -39,6 +39,8 @@ public class FlowFactory {
                                         ? ))
     }
 
-    private static CompletionStage<Long> TestConnection
+    private static CompletionStage<Long> TestConnection (String site, Long count) {
+        
+    }
 
 }
