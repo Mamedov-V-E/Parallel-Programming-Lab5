@@ -30,8 +30,6 @@ public class FlowFactory {
     private static final int NANO_TO_MILLIS_FACTOR = 1000000;
 
     public static Flow<HttpRequest, HttpResponse, NotUsed> createFlow(
-            Http http,
-            ActorSystem actorSystem,
             ActorRef cacheActor,
             ActorMaterializer materializer) {
         return Flow.of(HttpRequest.class).map(r -> {

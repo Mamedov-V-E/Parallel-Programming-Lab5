@@ -26,7 +26,7 @@ public class AkkaApp {
         final Http http = Http.get(system);
         final ActorMaterializer materializer = ActorMaterializer.create(system);
         final Flow<HttpRequest, HttpResponse, NotUsed> routeFlow =
-                FlowFactory.createFlow(http, system, cacheActor, materializer);
+                FlowFactory.createFlow(cacheActor, materializer);
         final CompletionStage<ServerBinding> binding = http.bindAndHandle(
                 routeFlow,
                 ConnectHttp.toHost(HOST_NAME, PORT_NUMBER),
