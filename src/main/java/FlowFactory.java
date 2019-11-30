@@ -35,7 +35,7 @@ public class FlowFactory {
                 Patterns.ask(cacheActor, new CheckCachedMessage(p.getKey().toString()), TIMOUT_MILLIS)
                         .thenCompose(result -> {
                             if (result.getClass() == String.class) {
-                                
+
                             }
                         }))
     }
