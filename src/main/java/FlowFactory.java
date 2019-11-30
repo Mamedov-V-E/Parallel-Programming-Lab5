@@ -11,7 +11,7 @@ import javafx.util.Pair;
 public class FlowFactory {
     private static final String SITE_PARAMETER_NAME = "testUrl";
     private static final String COUNT_PARAMETER_NAME = "count";
-    private static final int MAX_SIMULTANEOUS_
+    private static final int MAX_SIMULTANEOUS_REQUESTS = 10;
 
     public static Flow<HttpRequest, HttpResponse, NotUsed> createFlow(
             Http http,
@@ -20,6 +20,6 @@ public class FlowFactory {
         Flow.of(HttpRequest.class).map(r -> {
             Query q = r.getUri().query();
             return new Pair(q.get("testUrl").get(), Long.parseLong(q.get("count").get()));
-        }).mapAsync
+        }).mapAsync(MAX_SIMULTANEOUS_REQUESTS, )
     }
 }
