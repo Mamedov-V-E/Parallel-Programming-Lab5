@@ -4,6 +4,7 @@ import akka.http.javadsl.Http;
 import akka.http.javadsl.model.HttpRequest;
 import akka.http.javadsl.model.HttpResponse;
 import akka.http.javadsl.model.Query;
+import akka.pattern.Patterns;
 import akka.stream.ActorMaterializer;
 import akka.stream.javadsl.Flow;
 import javafx.util.Pair;
@@ -22,7 +23,7 @@ public class FlowFactory {
             Query q = r.getUri().query();
             return new Pair(q.get("testUrl").get(), Long.parseLong(q.get("count").get()));
         }).mapAsync(MAX_SIMULTANEOUS_REQUESTS, p -> {
-            Future<Object> cached = 
+            Future<Object> cached = Patterns.ask()
         })
     }
 }
