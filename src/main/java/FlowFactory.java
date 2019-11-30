@@ -37,12 +37,12 @@ public class FlowFactory {
             String site = q.get("testUrl").get();
             Long count = Long.parseLong(q.get("count").get());
 
-            return new Pair(site, count);
-        }).mapAsync(MAX_SIMULTANEOUS_REQUESTS, (p) ->
-                Patterns.ask(cacheActor, new CheckCachedMessage(p.getKey().toString()), TIMOUT_MILLIS)
+            return new TestConnectionRequest(site, count);
+        }).mapAsync(MAX_SIMULTANEOUS_REQUESTS, r ->
+                Patterns.ask(cacheActor, new CheckCachedMessage(r.getSite()), TIMOUT_MILLIS)
                         .thenCompose(result ->
                                 result.getClass() == String.class
-                                        ? TestConnection(p.getKey().toString(), (Long)p.getValue(), materializer)
+                                        ? TestConnection(r.getSite(), r.getCount(), materializer)
                                         : CompletableFuture.completedFuture((CacheMessage)result)))
                 .map(result -> {
                     cacheActor.tell(result, self());
