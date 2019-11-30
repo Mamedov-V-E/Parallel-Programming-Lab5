@@ -34,7 +34,9 @@ public class FlowFactory {
         }).mapAsync(MAX_SIMULTANEOUS_REQUESTS, (p) ->
                 Patterns.ask(cacheActor, new CheckCachedMessage(p.getKey().toString()), TIMOUT_MILLIS)
                         .thenCompose(result -> {
-                            
+                            if (result.getClass() == String.class) {
+                                
+                            }
                         }))
     }
 }
