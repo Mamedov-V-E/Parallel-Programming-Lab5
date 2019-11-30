@@ -19,6 +19,6 @@ public class FlowFactory {
         Flow.of(HttpRequest.class).map(r -> {
             Query q = r.getUri().query();
             return new Pair(q.get("testUrl").get(), Long.parseLong(q.get("count").get()));
-        }).
+        }).mapAsync()
     }
 }
